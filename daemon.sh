@@ -2,7 +2,9 @@
 
 #sshpass -p <naopass> ssh <utente>@<naoip>
 
-while(1){
+echo "Starting Daemon" | figlet
+
+while(True){
 
     python detection.py
     
