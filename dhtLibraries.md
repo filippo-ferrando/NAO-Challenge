@@ -1,3 +1,5 @@
+Comandi installazione libreria dht 22
+
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 
 sudo apt-get update
