@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "Installing DHT 22 libraries..."
+echo "Installing DHT 22 libraries..." 
 
 sleep 1s
 
@@ -31,3 +31,7 @@ sleep 1s
 clear
 
 echo "Installation complete ! " | figlet
+
+sleep 3s
+
+clear

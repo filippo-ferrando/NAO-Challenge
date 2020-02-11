@@ -1,18 +1,18 @@
-import Adafruit_DHT as dht  #libreria dht22
-import os   #libreria controllo dei file
-import mh_z19   #libreria mhz19 (co2)
+import Adafruit_DHT as dht  #lib dht22
+import os   #lib file control
+import mh_z19   #lib mhz19 (co2)
 
-h,t = dht.read_retry(dht.DHT22, 4) #4 pin del raspberry
-co2=mh_z19.read()                  #schema per la connessione salvato nei preferiti
+h,t = dht.read_retry(dht.DHT22, 4) #pin of rasp
+co2=mh_z19.read()                  #schema for connection bookmarked
 
-temp=open("temperature.txt","w")       #scrittura della variabile t nel file temperatura
+temp=open("temperature.txt","w")       #write t variable in temperature.txt file
 temp.write(repr(t))
 temp.close()
 
-hum=open("humidity.txt","w")        #scrittura della variabile h nel file umidità
+hum=open("humidity.txt","w")        #write h variable in humidity.txt file
 hum.write(repr(h))
-temp.close()
+hum.close()
 
-cco2=open("co2.txt","w")        #scrittura della variabile co2 nel file co2
+cco2=open("co2.txt","w")        #write co2 variable in co2.txt file
 cco2.write(repr(co2))
 cco2.close()
