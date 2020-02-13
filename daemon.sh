@@ -23,7 +23,7 @@ while true; do
     
     echo "Detection..."
 
-    sleep 1m  #security of data presence delay
+    sleep 10s  #security of data presence delay
 
     sshpass -p <naopass> scp /home/pi/temperature.txt <user>@<ipnao>:<percorsoMemoriaNao>/temperature.txt       #sending over ssh protocol temp, humdity and co2 files
     sshpass -p <naopass> scp /home/pi/humidity.txt <user>@<ipnao>:<percorsoMemoriaNao>/humidity.txt
@@ -34,22 +34,18 @@ while true; do
     sleep 3s
 
     #check if folder exist, if not it will make it
-    if [ -d /home/pi/rilevation/$d ]; then
-        echo "Folder alredy exist, Moving on"
-    else
-        echo "Making directory $d"
-        mkdir $d
-    fi
+
+    mkdir /home/pi/rilevation/$d
 
     #rename files with adding h,m
     mv /home/pi/temperature.txt /home/pi/temperature-$o.txt
-    mv /home/pi/humdity.txt /home/pi/humdity-$o.txt
+    mv /home/pi/humidity.txt /home/pi/humidity-$o.txt
     mv /home/pi/co2.txt /home/pi/co2-$o.txt
 
     #copy file in rilevation/$d directory
-    cp -r /home/pi/temperature-$o.txt /home/pi/rilevation/$d    #saving file in archive directory
-    cp -r /home/pi/humidity-$o.txt /home/pi/rilevation/$d
-    cp -r /home/pi/co2-$o.txt /home/pi/rilevation/$d
+    cp /home/pi/temperature-$o.txt ~/rilevation/$d    #saving file in archive directory
+    cp /home/pi/humidity-$o.txt ~/rilevation/$d
+    cp /home/pi/co2-$o.txt ~/rilevation/$d
 
     echo "Saving files..."
     
