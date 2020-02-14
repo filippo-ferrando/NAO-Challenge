@@ -32,9 +32,9 @@ sleep 1s
 
 clear
 
-echo "Adding autostart daemon"
+#echo "Adding autostart daemon"
 
-echo "./daemon.sh" >> ~/.bashrc
+#echo "./daemon.sh" >> ~/.bashrc
 
 sleep 1s
 
